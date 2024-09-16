@@ -1,6 +1,19 @@
 const path = require('path');
 const Image = require('@11ty/eleventy-img');
 
+async function imageData(src) {
+  const ext = path.extname(src);
+  const fileType = ext.replace('.', '');
+
+  const metadata = await Image(src, {
+    formats: [fileType],
+    outputDir: './_site/img/',
+  });
+
+  const data = metadata[fileType] ? metadata[fileType][0] : metadata.jpeg[0];
+  return data;
+}
+
 async function imageWithClassShortcode(
   src,
   cls,
@@ -12,15 +25,7 @@ async function imageWithClassShortcode(
     pathPrefix = process.env.BASEURL;
   }
 
-  const ext = path.extname(src);
-  const fileType = ext.replace('.', '');
-
-  const metadata = await Image(src, {
-    formats: [fileType],
-    outputDir: './_site/img/',
-  });
-
-  const data = metadata[fileType] ? metadata[fileType][0] : metadata.jpeg[0];
+  const data = await imageData(src);
   return `<img src="${pathPrefix}${data.url}" class="${cls}" alt="${alt}" loading="lazy" decoding="async">`;
 }
 
