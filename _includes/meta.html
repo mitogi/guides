@@ -35,6 +35,15 @@
   <meta property="og:title" content="{{page_title}}{{ titles_roots[guide].title }}" />
   <meta name="description" content="{{description}}" />
   <meta property="og:description" content="{{description}}" />
+  {% if meta_images[guide] %}
+    {% assign meta_image_path = meta_images[guide].path %}
+    {% if meta_images[guide].alt %}
+      {% assign meta_image_alt = meta_images[guide].alt %}
+    {% else %}
+      {% assign meta_image_alt = '' %}
+    {% endif %}
+    {% image_meta_tag meta_image_path meta_image_alt %}
+  {% endif %}
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@{{site.twitter}}" />

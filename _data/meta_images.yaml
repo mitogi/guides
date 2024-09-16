@@ -1,0 +1,4 @@
+# Optional meta image tag information for each guide
+derisking-government-tech:
+  path: assets/derisking-government-tech/img/icon.jpg
+  alt: An icon representing the de-risking guide document against a blue background.

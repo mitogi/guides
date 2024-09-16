@@ -37,7 +37,14 @@ async function imageShortcode(src, alt) {
   return await imageWithClassShortcode(src, '', alt);
 }
 
+async function imageMetaTagShortcode(src, alt) {
+  const pathPrefix = getPathPrefix();
+  const data = await imageData(src);
+  return `<meta property="og:image" content="${pathPrefix}${data.url}" />\n<meta property="og:image:alt" content="${alt}" />`;
+}
+
 module.exports = {
   imageWithClassShortcode,
   imageShortcode,
+  imageMetaTagShortcode,
 };

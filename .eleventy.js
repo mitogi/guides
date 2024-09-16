@@ -14,7 +14,7 @@ const svgSprite = require("eleventy-plugin-svg-sprite");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const yaml = require("js-yaml");
 
-const { imageShortcode, imageWithClassShortcode } = require('./config');
+const { imageShortcode, imageWithClassShortcode, imageMetaTagShortcode } = require('./config');
 
 const siteData = yaml.load(fs.readFileSync('./_data/site.yaml', 'utf8'));
 
@@ -293,6 +293,7 @@ module.exports = function (config) {
   // Set image shortcodes
   config.addLiquidShortcode('image', imageShortcode);
   config.addLiquidShortcode('image_with_class', imageWithClassShortcode);
+  config.addLiquidShortcode('image_meta_tag', imageMetaTagShortcode);
   config.addLiquidShortcode("uswds_icon", function (name) {
     return `
     <svg class="usa-icon" aria-hidden="true" role="img">
