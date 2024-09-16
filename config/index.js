@@ -14,17 +14,21 @@ async function imageData(src) {
   return data;
 }
 
-async function imageWithClassShortcode(
-  src,
-  cls,
-  alt,
-) {
+function getPathPrefix() {
   let pathPrefix = '';
 
   if (process.env.BASEURL) {
     pathPrefix = process.env.BASEURL;
   }
+  return pathPrefix;
+}
 
+async function imageWithClassShortcode(
+  src,
+  cls,
+  alt,
+) {
+  const pathPrefix = getPathPrefix();
   const data = await imageData(src);
   return `<img src="${pathPrefix}${data.url}" class="${cls}" alt="${alt}" loading="lazy" decoding="async">`;
 }
